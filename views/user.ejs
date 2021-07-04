@@ -1,0 +1,38 @@
+<%- include('header') -%>
+<div class="container">
+    <h1>User</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Volatage</th>
+        <th scope="col">Curent</th>
+        <th scope="col">Power</th>
+        <th scope="col">Energy Used</th>
+        <th scope="col">Energy Available</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td id="voltage_input">
+            <%= users.voltage_input %> V
+        </td>
+        <td id="current">
+                <%= users.current %> AMP
+        </td>
+        <td id="power">
+                <%= users.power %> KW
+        </td>
+        <td id= "energy_consumed">
+                <%= users.energy_consumed %> KW
+        </td>
+        <td id="available_energy">
+                <%= users.available_energy %>KW
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+<%- include('footer') -%>
