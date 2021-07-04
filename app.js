@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
 const firebase = require('firebase');
-app.use(express.static("public"))
+const path = require('path');
+const _ = require('lodash');
+const request = require('request');
+app.use(express.static(path.join(__dirname, 'control')));
+const {initializePayment, verifyPayment} = require('./control/paystack')(request);
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 app.set('view engine','ejs');
 const firebaseConfig = {
@@ -39,5 +46,42 @@ app.get('/payment',  (req,res)=>{
       title: "ADVANCE MATERING INFRASTRUCTURE (PAYMENT-MODE)"  
   });
   });
+
+  app.post('/paystack/pay', urlencodedParser, (req,res)=>{
+    const form = _.pick(req.body,['amount','email','full_name']);
+     form.metadata = {
+         full_name : form.full_name
+     }
+     form.amount *= 100;
+     initializePayment(form, (error, body)=>{
+         if(error){
+             //handle errors
+             console.log(error);
+             return;
+        }
+        response = JSON.parse(body);
+        res.redirect(response.data.authorization_url)
+     });
+         var data= req.body;
+         console.log(data);
+         var pur = data.amount;
+         database.ref("bought_energy").set(pur);
+ });
+ 
+ app.get('/paystack/callback', (req,res) => {
+   const ref = req.query.reference;
+   console.log(ref)
+   verifyPayment(ref, (error,body)=>{
+       if(error){
+           //handle errors appropriately
+           console.log(error)
+           return res.redirect('/error');
+       }
+       response = JSON.parse(body);
+       const data = _.at(response.data, ['reference', 'amount','customer.email', 'metadata.full_name']);
+       [reference, amount, email, full_name] = data;
+       console.log(data);
+   })
+ });
 
 app.listen(port, ()=>{console.log('Server started at port 3000')});
