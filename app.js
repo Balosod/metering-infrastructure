@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
-const https = require('https')
 const firebase = require('firebase');
 const path = require('path');
 const _ = require('lodash');
-const axios = require('axios');
 const request = require('request');
 app.use(express.static(path.join(__dirname, 'control')));
 const {initializePayment, verifyPayment} = require('./control/paystack')(request);
@@ -35,7 +33,7 @@ app.get('/', (req,res)=>{
        .then(function(snapshot){
           var a = snapshot.exists();  // true
           var users = snapshot.val()
-          console.log("yes u are good to go", a);
+          console.log("yes you are good to go", a);
           console.log(users);
           res.render('user', {
             title: "ADVANCE MATERING INFRASTRUCTURE",
@@ -85,13 +83,9 @@ app.get('/payment',  (req,res)=>{
       amount /=100;
       console.log(amount)
       var energy = amount; 
-      database.ref("bought_energy").set(energy) 
+      //database.ref("bought_energy").set(energy) 
       res.redirect('/');  
   })
-  // var data= req.body;
-  //   console.log(data);
-  //   var pur = data.amount;
-  //   database.ref("bought_energy").set(pur)
  });
 
 app.listen(port, ()=>{console.log('Server started at port 3000')});
