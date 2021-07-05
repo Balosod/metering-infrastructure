@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
+const https = require('https')
 const firebase = require('firebase');
 const path = require('path');
 const _ = require('lodash');
 const axios = require('axios');
 const request = require('request');
 app.use(express.static(path.join(__dirname, 'control')));
-//const {initializePayment, verifyPayment} = require('./control/paystack')(request);
+const {initializePayment, verifyPayment} = require('./control/paystack')(request);
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 var urlencodedParser = bodyParser.urlencoded({extended: false});
@@ -48,61 +49,49 @@ app.get('/payment',  (req,res)=>{
   });
   });
 
-  app.post('/paystack', urlencodedParser, (req,res)=>{
+  app.post('/paystack',urlencodedParser, (req,res)=>{
     const form = _.pick(req.body,['amount','email','full_name']);
     form.metadata = {
-      full_name : form.full_name
-  }
-     form.amount *= 100;
-     initializePayment = (form, mycallback) => {
-      const options = {
-          url : 'https://api.paystack.co/transaction/initialize',
-          headers : {
-              authorization:'https://api.paystack.co/transaction/initialize',
-              'content-type': 'application/json',
-              'cache-control': 'no-cache'    
-          },
-          form
-      }
-      const callback = (error, response, body) => {
-          return mycallback(error, body)
-      }
-      request.post(options, callback)
-      console.log(options);
-  }
-      var data= req.body
-      //res.redirect(data.authorization_url)
-
-   
-
-    // var data= req.body;
-    // console.log(data);
-    // var pur = data.amount;
-    // database.ref("bought_energy").set(pur)
-       });
+        full_name : form.full_name
+    }
+    form.amount *= 100;
     
-      
-    
-   
-        
+    initializePayment(form, (error, body)=>{
+        if(error){
+            //handle errors
+            console.log(error);
+            return res.redirect('/error')
+            return;
+        }
+        response = JSON.parse(body);
+        res.redirect(response.data.authorization_url)
+    });
+});
   
-
-
- 
  app.get('/paystack/callback', (req,res) => {
-   const ref = req.query.reference;
-   console.log(ref)
-   verifyPayment(ref, (error,body)=>{
-       if(error){
-           //handle errors appropriately
-           console.log(error)
-           return res.redirect('/error');
-       }
-       response = JSON.parse(body);
-       const data = _.at(response.data, ['reference', 'amount','customer.email', 'metadata.full_name']);
-       [reference, amount, email, full_name] = data;
-       console.log(data);
-   })
+  const ref = req.query.reference;
+  verifyPayment(ref, (error,body)=>{
+      if(error){
+          //handle errors appropriately
+          console.log(error)
+         // return res.redirect('/error');
+      }
+      response = JSON.parse(body); 
+      const data = _.at(response.data, ['reference', 'amount','customer.email', 'metadata.full_name']);
+
+        [reference, amount, email, full_name] =  data;  
+      console.log(data) 
+      console.log(amount)
+      amount /=100;
+      console.log(amount)
+      var energy = amount; 
+      database.ref("bought_energy").set(energy) 
+      res.redirect('/');  
+  })
+  // var data= req.body;
+  //   console.log(data);
+  //   var pur = data.amount;
+  //   database.ref("bought_energy").set(pur)
  });
 
 app.listen(port, ()=>{console.log('Server started at port 3000')});
