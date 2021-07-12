@@ -23,12 +23,13 @@ body{
   .topnav a:hover {
     background-color: #ddd;
     color: black;
+    max-width:100%;
   }
   .topnav .icon {
     display: none;
   }
   
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 600px) {
     .topnav a:not(:first-child) {display: none;}
     .topnav a.icon {
       float: right;
@@ -36,7 +37,7 @@ body{
     }
   }
   
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 600px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
       position: absolute;
