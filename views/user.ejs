@@ -2,22 +2,19 @@
 
 <div class="container" id= "body">
   <%- include('routing'); %>
-    <h1>User</h1>
+    <h1>Load Details</h1>
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Volatage</th>
-        <th scope="col">Curent</th>
-        <th scope="col">Power</th>
-        <th scope="col">Energy Consumed</th>
-        <th scope="col">Energy Available</th>
-
+        <th >Volatage</th>
+        <th >Curent</th>
+        <th >Power</th>
+        <th >Energy Consumed</th>
+        <th >Energy Available</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
         <td id="voltage_input">
             <%= users.voltage_input %> V
         </td>
@@ -33,7 +30,6 @@
         <td id="available_energy">
                 <%= users.available_energy %>KW
         </td>
-        
       </tr>
     </tbody>
   </table>
