@@ -130,7 +130,7 @@ app.post('/paystack',urlencodedParser, (req,res)=>{
     
         });
     
-app.get('/metering-infrastructure.herokuapp.com/paystack/callback', (req,res) => {
+app.get('https://metering-infrastructure.herokuapp.com/paystack/callback', (req,res) => {
     const ref = req.query.reference;
     verifyPayment(ref, (error,body)=>{
         if(error){
