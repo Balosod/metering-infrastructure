@@ -1,41 +1,30 @@
 <%- include('header') -%>
-<div class="container">
-<!-- <form action ="/payment" method="POST" class="row g-3 needs-validation" novalidate>
-    <div  class="col-md-4">
-      <label >Amount of Energy</label>
-      <input type = "number" name = "amount" placeholder="Enter Amount In KiloWatt"  class="form-control" id="bought" required>
-    </div>
+<%- include('routing'); %>
+<form  action ="/paystack" method="post">
+  <div class="container">  
     
-    <div class="col-12">
-      <button class="btn btn-primary" id="bought1" type="submit">Purchase Energy</button>
-    </div>
-  </form> -->
-
-  <form  action ="/paystack" method="POST" id="paymentForm" class="row g-3 needs-validation" novalidate>
-    <div class="form-group">
       <label for="email">Email Address</label>
       <input name = "email" type="email" id="email-address" class="form-control" required />
-    </div>
-    <div class="form-group">
+    
+   
       <label for="amount">Amount</label>
-      <input name = "amount" type="tel" id="amount"  placeholder="Enter Amount In KiloWatt"  class="form-control required" />
-    </div>
+      <input name = "amount" type="tel" id="amount"  placeholder="Enter Amount In KiloWatt"  class="form-control" required />
+    
 
-    <div class="form-group">
+    
       <label for="full_name">First Name</label>
-      <input name = "full_name" type="text" id="first-name" class="form-control" />
+      <input name = "full_name" type="text" id="first-name" class="form-control" required />
+    
+    
+      <label for="meter_number">Meter Number</label>
+      <input name = "meter_number" type="text" id="meter_number" class="form-control" required/>
+      <small>Enter correct meter_number, which is thesame as what you used to login</small>
+    
+    <div class="col-2">
+      <button class="btn btn-primary" type="submit"> Pay </button>
     </div>
-    <div class="form-group">
-      <label for="last-name">Last Name</label>
-      <input name = "last-name" type="text" id="last-name" class="form-control" />
-    </div>
-    <div class="form-submit">
-      <button class="btn btn-primary" type="submit" onclick="payWithPaystack()"> Pay </button>
-    </div>
-  </form>
+  </div>
+</form>
   <script src="https://js.paystack.co/v1/inline.js"></script> 
 
-
-
-</div>
 <%- include('footer') -%>

@@ -1,0 +1,16 @@
+<%- include('header') -%>
+<form action="/reset" method="post">
+    <div class="container">
+      <label for="uname"><b>Meter Number</b></label>
+      <input type="text" placeholder="Enter Meter Number" name="meter_number" required>
+      <label for="uname"><b>New Password</b></label>
+      <input type="text" placeholder="Enter your New Password" name="newpassword" required>
+      <label for="uname"><b>confirm Password</b></label>
+      <input type="text" placeholder="confirm Password" name="confirmpassword" required>
+      <div class="col-2">
+        <button class="btn btn-success" type="submit">submit</button>
+      </div>
+      <a class="btn btn-primary" href="/">Back</a>
+    </div>
+  </form>
+<%- include('footer') -%>

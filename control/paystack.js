@@ -2,7 +2,7 @@ const paystack = (request) => {
   const MySecretKey = 'Bearer sk_test_b470ca00bd0e0b51f1be4fa9a374d740f297788d';
   //replace the secret key with that from your paystack account
   const initializePayment = (form, mycallback) => {
-      const options = {
+    const options = {
           url : 'https://api.paystack.co/transaction/initialize',
           headers : {
               authorization: MySecretKey,
@@ -14,6 +14,7 @@ const paystack = (request) => {
       const callback = (error, response, body) => {
           return mycallback(error, body)
       }
+      console.log(options);
       request.post(options, callback)
   }
 
