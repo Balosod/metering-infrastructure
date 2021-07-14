@@ -148,10 +148,9 @@ app.get('/paystack/callback', (req,res) => {
         console.log(amount);
        //ASSUMING #30 PERUNIT OF ENERGY
        // #30. = 1000W/h
-       // #30. = 3,600,000Ws
        const cost = 30;
-       var rate = ((amount * 3600000)/30);
-      // Converted back to Kws;
+       var rate = ((amount * 1000)/30);
+      // Converted back to Kwh;
            rate /=1000;
        var energy  = rate;
         console.log(energy);
