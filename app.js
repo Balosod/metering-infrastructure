@@ -148,8 +148,11 @@ app.get('/paystack/callback', (req,res) => {
         console.log(amount);
        //ASSUMING #30 PERUNIT OF ENERGY
        // #30. = 1000W/h
-       const rate = 30;
-       var energy = ((amount * 1000)/30);
+       const cost = 30;
+       var rate = ((amount * 1000)/30);
+      // Converted back to Kw/h;
+           rate /=1000;
+       var energy  = rate;
         console.log(energy);
         console.log('users',meter_number, 'paid')
         database.ref(meter_number+"/bought_energy").set(energy) ;
