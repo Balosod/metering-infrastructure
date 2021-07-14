@@ -153,8 +153,7 @@ app.get('/paystack/callback', (req,res) => {
       // Converted back to Kwh;
            rate /=1000;
         var fixedR1 = parseFloat(rate).toFixed(2);
-        var fixedR2 = parseInt(fixedR1);
-       var energy  = fixedR2;
+       var energy  = fixedR1;
         console.log(energy);
         console.log('users',meter_number, 'paid')
         database.ref(meter_number+"/bought_energy").set(energy) ;
