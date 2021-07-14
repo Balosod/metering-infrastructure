@@ -2,7 +2,7 @@
 
 <div class="container" id= "body">
   <%- include('routing'); %>
-    <h1>Load Details</h1>
+    <h1>Consumption Details</h1>
 <table class="table">
     <thead>
       <tr>
@@ -22,13 +22,13 @@
                 <%= users.current %> AMP
         </td>
         <td id="power">
-                <%= users.power %> KW/h
+                <%= users.power %> KWH
         </td>
         <td id= "energy_consumed">
-                <%= users.energy_consumed %> KW/h
+                <%= users.energy_consumed %> KWH
         </td>
         <td id="available_energy">
-                <%= users.energy_available %>KW/h
+                <%= users.energy_available %>KWH
         </td>
       </tr>
     </tbody>
