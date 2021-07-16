@@ -1,4 +1,9 @@
 <%- include('header') -%>
+<% if(message.length > 0) { %>
+  <div class="alert alert-danger">
+    <%= message %>
+  </div>
+<% } %>
 <form action="/reset" method="post">
     <div class="container">
       <label for="uname"><b>Meter Number</b></label>

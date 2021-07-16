@@ -1,7 +1,12 @@
 <%- include('header') -%>
-
+<%- include('routing'); %>
+<% if(message.length > 0) { %>
+  <div class="alert alert-success">
+    <%= message %>
+  </div>
+<% } %>
 <div class="container" id= "body">
-  <%- include('routing'); %>
+  
     <h1>Consumption Details</h1>
 <table class="table">
     <thead>

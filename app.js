@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 app.use(express.static('public'));
 const session = require('express-session');
-//var flash = require('express-flash');
-//var flash = require('connect-flash');
+var flush = require('connect-flash');
 const request = require('request');
 const _ = require('lodash');
 const path = require('path');
@@ -31,10 +30,11 @@ const firebase = require('firebase');
 
     app.use(session({
       secret: 'secret',
+      cookie: {masAge : 6000},
       resave: true,
       saveUninitialized: true
     }));
-  //   app.use(flash());    
+    app.use(flush());    
 
   //   app.use(function (req, res, next) {
   //     res.locals.flash_success_message = req.flash('flash_success_message'); 
@@ -43,6 +43,7 @@ const firebase = require('firebase');
   // });
 app.get('/',   (req,res)=>{
     res.render('sign', {
+      message: req.flash('message'),
       title: "ADVANCE MATERING INFRASTRUCTURE (PAYMENT-MODE)"  
   });
   });
@@ -59,15 +60,16 @@ app.get('/',   (req,res)=>{
               console.log(users);
               
   if(a===false){
-    return res.redirect('/error');
+    req.flash('message', 'Meter Number or Password incorrect');
+    return res.redirect('/');
   }
   else{
     password1=users.password
     if (users && password ==password1){
          req.session.loggedin = true;
          req.session.meter_number = meter_number;
+         req.flash('message', 'You are logged in');
          res.redirect('/home');
-         //req.flash('success_msg', 'You are logged in');
       } else{
       return res.redirect('/error');
       }
@@ -82,10 +84,12 @@ app.get('/',   (req,res)=>{
 app.get('/home', (req,res)=>{
     if(req.session.loggedin){
         res.render('user', {
+          message: req.flash('message'),
           title: "ADVANCE MATERING INFRASTRUCTURE",
           users:users
           });
         }else{
+          req.flash('message', 'You need to login to access this home page');
           return res.redirect('/')
         }
       });
@@ -96,6 +100,7 @@ app.get('/payment',  (req,res)=>{
       title: "ADVANCE MATERING INFRASTRUCTURE (PAYMENT-MODE)"  
   });
     }else{
+      req.flash('message', 'You need to login to access this pament page');
       return res.redirect('/')
     }
      
@@ -158,11 +163,13 @@ app.get('/paystack/callback', (req,res) => {
         console.log(energy);
         console.log('users',meter_number, 'paid')
         database.ref(meter_number+"/bought_energy").set(energy) ;
+        req.flash('message', 'payment successfull');
         res.redirect('/');  
     })
    });
    app.get('/password',  (req,res)=>{
         res.render('password', {
+          message: req.flash('message'),
           title: "ADVANCE MATERING INFRASTRUCTURE",
           });
   });
@@ -172,39 +179,65 @@ app.get('/paystack/callback', (req,res) => {
     var ref =firebase.database().ref(meter_number);
         ref.once('value')
          .then(function(snapshot){
-            var a = snapshot.exists();  // true
+             a = snapshot.exists();  // true
             users = snapshot.val()
-              reference1=users.reference
-              console.log(reference1)
-    if (users && reference ===reference1){
-      res.render('changed', {
-        title: "ADVANCE MATERING INFRASTRUCTURE",
-        });
-      } else{
-      return res.redirect('/error');
-      }
+    if(a===false){
+      req.flash('message', 'Meter Number or Reference Number incorrect');
+      return res.redirect('/password');
+    }else{
+           reference1=users.reference
+      if (users && reference ===reference1){
+        res.render('changed', {
+          message: req.flash('message'),
+          title: "ADVANCE MATERING INFRASTRUCTURE",
+          });
+        } else{
+          req.flash('message', 'Meter Number or Reference number incorrect');
+        return res.redirect('/password');
+        }
+    }
+   
       res.end();
   });
   
   });
+  app.get('/changed',  (req,res)=>{
+    res.render('changed', {
+      message: req.flash('message'),
+      title: "ADVANCE MATERING INFRASTRUCTURE"  
+  });
+      });
   app.post('/reset', urlencodedParser, (req,res)=>{
     var meter_number = req.body.meter_number;
     var newpassword = req.body.newpassword;
     var confirmpassword = req.body.confirmpassword;
-    if(newpassword == confirmpassword){
-      database.ref(meter_number+"/password").set(newpassword) ;
-      res.redirect('/');  
+    var ref =firebase.database().ref(meter_number);
+    ref.once('value')
+     .then(function(snapshot){
+         a = snapshot.exists();  // true
+    if(a===false){
+      req.flash('message', 'Meter Number does not exist');
+      return res.redirect('/changed');
     } else{
-      return res.redirect('/error');
+      if(newpassword == confirmpassword){
+        database.ref(meter_number+"/password").set(newpassword) ;
+        req.flash('message', 'You have successfully changed your password');
+        res.redirect('/');  
+      } else{
+        req.flash('message', 'Meter Number or Password did not match');
+        res.redirect('/changed');
+      }
     }
+   
     });
+  });
    app.get('/logout',  (req,res)=>{
     req.session.destroy((err)=>{})
     return res.redirect('/');
   });
   app.get('/error',  (req,res)=>{
     res.render('error', {
-      title: "ADVANCE MATERING INFRASTRUCTURE (PAYMENT-MODE)"  
+      title: "ADVANCE MATERING INFRASTRUCTURE"  
   });
   });
 
