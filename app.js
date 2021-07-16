@@ -71,7 +71,8 @@ app.get('/',   (req,res)=>{
          req.flash('message', 'You are logged in');
          res.redirect('/home');
       } else{
-      return res.redirect('/error');
+      req.flash('message', 'Meter Number or Password incorrect');
+      return res.redirect('/');
       }
       res.end();
    

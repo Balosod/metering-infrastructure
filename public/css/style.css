@@ -169,3 +169,7 @@ body{
        width: 100%;
     }
   }
+  #tableu{
+    width: 10%;
+    background-color: chartreuse;
+  }
