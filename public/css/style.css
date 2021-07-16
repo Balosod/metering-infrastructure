@@ -170,6 +170,7 @@ body{
     }
   }
   #tableu{
-    width: 10%;
+    
+    margin: auto;
     background-color: chartreuse;
   }
