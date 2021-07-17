@@ -1,41 +1,43 @@
 <%- include('header') -%>
 <%- include('routing'); %>
-<div class="cont" id= "body">
+<div>
   <% if(message.length > 0) { %>
     <div class="alert alert-success">
       <%= message %>
-    </div>
+</div>
   <% } %>
-    <h1>Consumption Details</h1>
-<table class="table" id="tableu">
-    <thead>
-      <tr>
-        <th >Voltage</th>
-        <th >Current</th>
-        <th >Power</th>
-        <th >Used Energy</th>
-        <th >Energy Available</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td id="voltage_input">
-            <%= users.voltage_input %> V
-        </td>
-        <td id="current">
-                <%= users.current %> AMP
-        </td>
-        <td id="power">
-                <%= users.power %> KW
-        </td>
-        <td id= "energy_consumed">
-                <%= users.energy_consumed %> KWh
-        </td>
-        <td id="available_energy">
-                <%= users.energy_available %>KWh
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="container">
+        <h1>Consumption Details</h1>
+    <table class="table" id="tableu">
+        <thead>
+          <tr>
+            <th >Voltage</th>
+            <th >Current</th>
+            <th >Power</th>
+            <th >Used Energy</th>
+            <th >Energy Available</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="voltage_input">
+                <%= users.voltage_input %> V
+            </td>
+            <td id="current">
+                    <%= users.current %> AMP
+            </td>
+            <td id="power">
+                    <%= users.power %> KW
+            </td>
+            <td id= "energy_consumed">
+                    <%= users.energy_consumed %> KWh
+            </td>
+            <td id="available_energy">
+                    <%= users.energy_available %>KWh
+            </td>
+          </tr>
+        </tbody>
+      </table>
  </div> 
 <%- include('footer') -%>
