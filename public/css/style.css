@@ -177,6 +177,9 @@ body{
     flex:1;
     flex-wrap: wrap;
     
+    @media all and (max-width: 400px) {  
+    flex-basis: 100%;  
+  }
     
     background-color: chartreuse;
   }
