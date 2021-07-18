@@ -173,6 +173,7 @@ body{
     }
   }
   #tableu{
+    display: flex;
     width:60%;
     
     background-color: chartreuse;
