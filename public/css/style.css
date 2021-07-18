@@ -18,7 +18,6 @@ body{
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-     flex : 1;
   }
  
   
@@ -31,7 +30,7 @@ body{
     display: none;
   }
   
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 600px) {
     .topnav a:not(:first-child) {display: none;}
     .topnav a.icon {
       float: right;
@@ -39,15 +38,13 @@ body{
     }
   }
   
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 600px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
       position: absolute;
       right: 0;
       top: 0;
-      left:0;
-     
-    }
+}
     .topnav.responsive a {
       float: none;
       display: block;
@@ -176,12 +173,4 @@ body{
     display: flex;
     flex:1;
     flex-wrap: wrap;
-    background-color: chartreuse;
   }
-
- // tr{
-    //display: flex;
-   // flex:1;
-  //  flex-wrap: wrap;
-  //  background-color: chartreuse;
- // }
