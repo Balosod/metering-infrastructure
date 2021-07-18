@@ -175,6 +175,7 @@ body{
   #tableu{
     display: flex;
     flex:1;
+    flex-wrap: wrap;
     width:60%;
     
     background-color: chartreuse;
