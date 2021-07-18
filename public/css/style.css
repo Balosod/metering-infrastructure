@@ -176,10 +176,12 @@ body{
     display: flex;
     flex:1;
     flex-wrap: wrap;
-    
-    @media all and (max-width: 400px) {  
-    flex-basis: 100%;  
+    background-color: chartreuse;
   }
-    
+
+  tr{
+    display: flex;
+    flex:1;
+    flex-wrap: wrap;
     background-color: chartreuse;
   }
