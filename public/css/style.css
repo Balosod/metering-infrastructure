@@ -172,7 +172,7 @@ body{
        width: 100%;
     }
   }
-  #tableu{
+  td{
     display: flex;
     flex:1;
     flex-wrap: wrap;
