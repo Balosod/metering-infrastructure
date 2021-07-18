@@ -172,16 +172,16 @@ body{
        width: 100%;
     }
   }
-  td{
+  table{
     display: flex;
     flex:1;
     flex-wrap: wrap;
     background-color: chartreuse;
   }
 
-  tr{
-    display: flex;
-    flex:1;
-    flex-wrap: wrap;
-    background-color: chartreuse;
-  }
+ // tr{
+    //display: flex;
+   // flex:1;
+  //  flex-wrap: wrap;
+  //  background-color: chartreuse;
+ // }
