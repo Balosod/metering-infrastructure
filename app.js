@@ -15,14 +15,14 @@ const port = process.env.PORT || 3000;
 const firebase = require('firebase');
    
   const firebaseConfig = {
-    apiKey: "AIzaSyB05QhqkQa_JCYaLEFTtyJ4zouKUFKqjbU",
-    authDomain: "library-testing-7fb5a.firebaseapp.com",
-    databaseURL: "https://library-testing-7fb5a-default-rtdb.firebaseio.com",
-    projectId: "library-testing-7fb5a",
-    storageBucket: "library-testing-7fb5a.appspot.com",
-    messagingSenderId: "362808701128",
-    appId: "1:362808701128:web:c9990bd74acaff0a58b5fd",
-    measurementId: "G-21C1MQ2EQR"
+    apiKey: "AIzaSyBsJTIxURnCyMIpcAJwB5EO0TBr4Wye32s",
+    authDomain: "advance-metering.firebaseapp.com",
+    databaseURL: "https://advance-metering-default-rtdb.firebaseio.com",
+    projectId: "advance-metering",
+    storageBucket: "advance-metering.appspot.com",
+    messagingSenderId: "191414801465",
+    appId: "1:191414801465:web:40ddd163bfaf3fa504a9e8",
+    measurementId: "G-P5ML6DJR7V"
   };
     firebase.initializeApp(firebaseConfig)
     let database = firebase.database();
@@ -44,7 +44,7 @@ const firebase = require('firebase');
 app.get('/',   (req,res)=>{
     res.render('sign', {
       message: req.flash('message'),
-      title: "ADVANCE MATERING INFRASTRUCTURE (PAYMENT-MODE)"  
+      title: "ADVANCE MATERING INFRASTRUCTURE"  
   });
   });
   app.post('/verification',  urlencodedParser, (req,res,next)=>{
@@ -98,7 +98,7 @@ app.get('/home', (req,res)=>{
 app.get('/payment',  (req,res)=>{
   if(req.session.loggedin){
     res.render('bought', {
-      title: "ADVANCE MATERING INFRASTRUCTURE (PAYMENT-MODE)"  
+      title: "ADVANCE MATERING INFRASTRUCTURE"  
   });
     }else{
       req.flash('message', 'You need to login to access this pament page');
@@ -225,7 +225,7 @@ app.get('/paystack/callback', (req,res) => {
         req.flash('message', 'You have successfully changed your password');
         res.redirect('/');  
       } else{
-        req.flash('message', 'Meter Number or Password did not match');
+        req.flash('message', 'Password did not match');
         res.redirect('/changed');
       }
     }
