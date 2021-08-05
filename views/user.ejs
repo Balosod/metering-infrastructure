@@ -22,19 +22,19 @@
         <tbody>
           <tr>
             <td id="voltage_input">
-                <%= users.voltage_input %> V
+                <%= users.voltage_input.toFixed(2) %> V
             </td>
             <td id="current">
-                    <%= users.current %> AMP
+                    <%= users.current.toFixed(2) %> AMP
             </td>
             <td id="power">
-                    <%= users.power %> KW
+                    <%= users.power.toFixed(2) %> KW
             </td>
             <td id= "energy_consumed">
-                    <%= users.energy_consumed %> KWh
+                    <%= users.energy_consumed.toFixed(2) %> KWh
             </td>
             <td id="available_energy">
-                    <%= users.energy_available %>KWh
+                    <%= users.energy_available.toFixed(2) %>KWh
             </td>
           </tr>
         </tbody>

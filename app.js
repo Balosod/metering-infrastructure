@@ -56,6 +56,7 @@ app.get('/',   (req,res)=>{
          .then(function(snapshot){
             a = snapshot.exists();  // true
             users = snapshot.val()
+        
            console.log("yes you are good to go", a);
               console.log(users);
               
