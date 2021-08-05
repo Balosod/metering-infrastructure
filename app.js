@@ -56,7 +56,6 @@ app.get('/',   (req,res)=>{
          .then(function(snapshot){
             a = snapshot.exists();  // true
             users = snapshot.val()
-            users = parseFloat(users).toFixed(2)
            console.log("yes you are good to go", a);
               console.log(users);
               
