@@ -15,14 +15,14 @@ const port = process.env.PORT || 3000;
 const firebase = require('firebase');
    
   const firebaseConfig = {
-    apiKey: "AIzaSyBsJTIxURnCyMIpcAJwB5EO0TBr4Wye32s",
+    apiKey: "",
     authDomain: "advance-metering.firebaseapp.com",
     databaseURL: "https://advance-metering-default-rtdb.firebaseio.com",
     projectId: "advance-metering",
     storageBucket: "advance-metering.appspot.com",
-    messagingSenderId: "191414801465",
-    appId: "1:191414801465:web:40ddd163bfaf3fa504a9e8",
-    measurementId: "G-P5ML6DJR7V"
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
   };
     firebase.initializeApp(firebaseConfig)
     let database = firebase.database();
